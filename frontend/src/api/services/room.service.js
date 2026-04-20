@@ -1,6 +1,6 @@
 import axios from "../axios.js";
 
-export const login = async (data) => {
-  const res = await axios.post("/auth/login", data);
+export const createRoom = async () => {
+  const res = await axios.post("/room/create");
   return res.data;
 };

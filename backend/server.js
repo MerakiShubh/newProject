@@ -6,11 +6,13 @@ import { initSocket } from "./src/socket/index.js";
 import { config } from "./src/config/config.js";
 const app = express();
 
-// const frontendUrl = process.env.FRONTEND_URL;
+// const frontendUrl = config.get("frontendUrl");
+// console.log("front -->", frontendUrl);
 
 app.use(
   cors({
     origin: config.get("frontendUrl"),
+    credentials: true,
   }),
 );
 
@@ -18,6 +20,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: config.get("frontendUrl"),
+    credentials: true,
   },
 });
 
@@ -26,6 +29,15 @@ initSocket(io);
 app.get("/health", (req, res) => {
   res.send("Everyting is fine!!");
 });
+
+app.use((req, res, next) => {
+  console.log("Cookies: ", req.headers.cookie);
+  next();
+});
+
+import roomRoutes from "./src/routes/clientRoom.routes.js";
+
+app.use("/api/room", roomRoutes);
 
 const PORT = config.get("port");
 
