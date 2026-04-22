@@ -30,11 +30,6 @@ app.get("/health", (req, res) => {
   res.send("Everyting is fine!!");
 });
 
-app.use((req, res, next) => {
-  console.log("Cookies: ", req.headers.cookie);
-  next();
-});
-
 import roomRoutes from "./src/routes/clientRoom.routes.js";
 
 app.use("/api/room", roomRoutes);

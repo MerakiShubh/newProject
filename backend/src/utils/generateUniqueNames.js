@@ -5,8 +5,10 @@ import {
   animals,
 } from "unique-names-generator";
 
-export const generateUniqueRoomName = uniqueNamesGenerator({
-  dictionaries: [adjectives, colors, animals],
-  style: "lowerCase",
-  separator: "_",
-});
+export const generateUniqueRoomName = () => {
+  return uniqueNamesGenerator({
+    dictionaries: [adjectives, colors, animals],
+    style: "lowerCase",
+    separator: "_",
+  });
+};
